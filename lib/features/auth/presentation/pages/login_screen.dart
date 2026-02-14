@@ -1,28 +1,26 @@
-import 'package:clean_architecture_project/features/auth/presentation/pages/login_screen.dart';
+import 'package:clean_architecture_project/features/auth/presentation/pages/sign_up_screen.dart';
 import 'package:clean_architecture_project/features/auth/presentation/widgets/auth_gradient_button.dart';
 import 'package:clean_architecture_project/features/auth/presentation/widgets/auth_field.dart';
 import 'package:clean_architecture_project/features/auth/presentation/widgets/auth_notes.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-class SignUpScreen extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   static route() =>
-      MaterialPageRoute(builder: (context) => const SignUpScreen());
-  const SignUpScreen({super.key});
+      MaterialPageRoute(builder: (context) => const LoginScreen());
+  const LoginScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   final _fromKey = GlobalKey<FormState>();
   final _emailTEController = TextEditingController();
-  final _phoneTEController = TextEditingController();
   final _passwordTEController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -31,13 +29,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
             mainAxisAlignment: .center,
             children: [
               const Text(
-                'Sign Up',
+                'Sign In',
                 style: TextStyle(fontSize: 50, fontWeight: .bold),
               ),
               const Gap(30),
               AuthField(hintText: 'Email', controller: _emailTEController),
-              const Gap(16),
-              AuthField(hintText: 'Phone', controller: _phoneTEController),
               const Gap(16),
               AuthField(
                 hintText: 'Passwrod',
@@ -45,14 +41,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               const Gap(24),
               const AuthGradientButton(
-                text: 'Sign Up.',
+                text: 'Sign In.',
                 buttonColor: Colors.white,
               ),
               const Gap(16),
               AuthNotes(
-                onPressed: () => Navigator.push(context, LoginScreen.route()),
-                normalText: 'Already Have an Account? ',
-                text: 'Sign In',
+                onPressed: () => Navigator.push(context, SignUpScreen.route()),
+                normalText: 'Don\'t have an account? ',
+                text: 'Sign Up',
               ),
             ],
           ),
@@ -64,7 +60,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   void dispose() {
     _emailTEController.dispose();
-    _phoneTEController.dispose();
     _passwordTEController.dispose();
     super.dispose();
   }
