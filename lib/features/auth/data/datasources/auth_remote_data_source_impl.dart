@@ -1,0 +1,35 @@
+import 'package:clean_architecture_project/core/helpers/exceptions.dart';
+import 'package:clean_architecture_project/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
+  final SupabaseClient supabaseClient;
+
+  AuthRemoteDataSourceImpl({required this.supabaseClient});
+  @override
+  Future<String> logIn({required String email, required String password}) {
+    // TODO: implement signUp
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<String> signUp({
+    required String name,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final response = await supabaseClient.auth.signUp(
+        password: password,
+        email: email,
+        data: {'name': name},
+      );
+      if (response.user == null) {
+        throw ServerExceptions('User is null!!');
+      }
+      return response.user!.id;
+    } catch (e) {
+      throw ServerExceptions(e.toString());
+    }
+  }
+}
