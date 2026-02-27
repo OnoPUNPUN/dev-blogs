@@ -40,9 +40,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 controller: _passwordTEController,
               ),
               const Gap(24),
-              const AuthGradientButton(
+              AuthGradientButton(
                 text: 'Sign In.',
                 buttonColor: Colors.white,
+                onPressed: () {},
               ),
               const Gap(16),
               AuthNotes(
