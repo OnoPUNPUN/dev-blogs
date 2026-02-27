@@ -12,11 +12,13 @@ final serviLocatore = GetIt.instance;
 
 Future<void> initDependency() async {
   _initAuth();
-  final supbase = await Supabase.initialize(
-    url: AppSecrets.subaseUrl,
-    anonKey: AppSecrets.subaseKey,
-  );
-  serviLocatore.registerLazySingleton(() => supbase.client);
+  if (!serviLocatore.isRegistered<SupabaseClient>()) {
+    final supbase = await Supabase.initialize(
+      url: AppSecrets.subaseUrl,
+      anonKey: AppSecrets.subaseKey,
+    );
+    serviLocatore.registerLazySingleton<SupabaseClient>(() => supbase.client);
+  }
 }
 
 void _initAuth() {
@@ -30,7 +32,9 @@ void _initAuth() {
 
   serviLocatore.registerFactory(() => UserSignUp(serviLocatore()));
 
-  serviLocatore.registerLazySingleton(
-    () => AuthBloc(userSignUp: serviLocatore()),
-  );
+  if (!serviLocatore.isRegistered<AuthBloc>()) {
+    serviLocatore.registerLazySingleton(
+      () => AuthBloc(userSignUp: serviLocatore()),
+    );
+  }
 }

@@ -10,7 +10,7 @@ void main() async {
   await initDependency();
   runApp(
     MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => serviLocatore<AuthBloc>())],
+      providers: [BlocProvider.value(value: serviLocatore<AuthBloc>())],
       child: const MyApp(),
     ),
   );
