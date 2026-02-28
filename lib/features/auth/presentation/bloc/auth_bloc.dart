@@ -1,3 +1,4 @@
+import 'package:clean_architecture_project/features/auth/domain/entities/user.dart';
 import 'package:clean_architecture_project/features/auth/domain/usecases/user_sign_up.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,7 +23,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       response.fold(
         (failure) => emit(AuthFailureState(failure.message)),
-        (uid) => AuthSuccesState(uid),
+        (user) => AuthSuccesState(user),
       );
     });
   }
