@@ -7,5 +7,5 @@ abstract interface class AuthRemoteDataSource {
     required String password,
   });
 
-  Future<String> logIn({required String email, required String password});
+  Future<UserModel> logIn({required String email, required String password});
 }
