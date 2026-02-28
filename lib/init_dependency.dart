@@ -3,6 +3,7 @@ import 'package:clean_architecture_project/features/auth/data/datasources/auth_r
 import 'package:clean_architecture_project/features/auth/data/datasources/auth_remote_data_source_impl.dart';
 import 'package:clean_architecture_project/features/auth/data/repository/auth_repository_impl.dart';
 import 'package:clean_architecture_project/features/auth/domain/repository/auth_repository.dart';
+import 'package:clean_architecture_project/features/auth/domain/usecases/user_log_in.dart';
 import 'package:clean_architecture_project/features/auth/domain/usecases/user_sign_up.dart';
 import 'package:clean_architecture_project/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -32,9 +33,11 @@ void _initAuth() {
 
   serviLocatore.registerFactory(() => UserSignUp(serviLocatore()));
 
+  serviLocatore.registerFactory(() => UserLogIn(serviLocatore()));
+
   if (!serviLocatore.isRegistered<AuthBloc>()) {
     serviLocatore.registerLazySingleton(
-      () => AuthBloc(userSignUp: serviLocatore()),
+      () => AuthBloc(userSignUp: serviLocatore(), userLogin: serviLocatore()),
     );
   }
 }

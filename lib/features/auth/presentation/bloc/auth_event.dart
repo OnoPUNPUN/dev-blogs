@@ -18,3 +18,10 @@ final class AuthSignUp extends AuthEvent {
     required this.name,
   });
 }
+
+final class AuthLogIn extends AuthEvent {
+  final String email;
+  final String password;
+
+  const AuthLogIn({required this.email, required this.password});
+}
