@@ -1,3 +1,4 @@
+import 'package:clean_architecture_project/core/common/cubits/app_user/app_user_cubit.dart';
 import 'package:clean_architecture_project/core/theme/theme.dart';
 import 'package:clean_architecture_project/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:clean_architecture_project/features/auth/presentation/pages/login_screen.dart';
@@ -10,7 +11,10 @@ void main() async {
   await initDependency();
   runApp(
     MultiBlocProvider(
-      providers: [BlocProvider.value(value: serviLocatore<AuthBloc>())],
+      providers: [
+        BlocProvider.value(value: serviLocatore<AuthBloc>()),
+        BlocProvider.value(value: serviLocatore<AppUserCubit>()),
+      ],
       child: const MyApp(),
     ),
   );
@@ -36,7 +40,17 @@ class _MyAppState extends State<MyApp> {
       title: 'Blog App',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkThemeMode,
-      home: const LoginScreen(),
+      home: BlocSelector<AppUserCubit, AppUserState, bool>(
+        selector: (state) {
+          return state is AppUserLoggedInState;
+        },
+        builder: (context, isLoggedIn) {
+          if (isLoggedIn) {
+            return Scaffold(body: Center(child: Text('Logged IN')));
+          }
+          return const LoginScreen();
+        },
+      ),
     );
   }
 }
