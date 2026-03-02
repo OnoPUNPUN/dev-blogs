@@ -1,6 +1,6 @@
 import 'package:clean_architecture_project/core/helpers/failures.dart';
 import 'package:clean_architecture_project/core/usecase/usecase.dart';
-import 'package:clean_architecture_project/features/auth/domain/entities/user.dart';
+import 'package:clean_architecture_project/core/common/entities/user.dart';
 import 'package:clean_architecture_project/features/auth/domain/repository/auth_repository.dart';
 import 'package:fpdart/fpdart.dart';
 

@@ -1,3 +1,4 @@
+import 'package:clean_architecture_project/core/common/cubits/app_user/app_user_cubit.dart';
 import 'package:clean_architecture_project/core/secrets/app_secrets.dart';
 import 'package:clean_architecture_project/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:clean_architecture_project/features/auth/data/datasources/auth_remote_data_source_impl.dart';
@@ -21,6 +22,9 @@ Future<void> initDependency() async {
     );
     serviLocatore.registerLazySingleton<SupabaseClient>(() => supbase.client);
   }
+
+  //  core
+  serviLocatore.registerLazySingleton(() => AppUserCubit());
 }
 
 void _initAuth() {
@@ -46,6 +50,7 @@ void _initAuth() {
         userSignUp: serviLocatore(),
         userLogin: serviLocatore(),
         currentUser: serviLocatore(),
+        appUserCubit: serviLocatore(),
       ),
     );
   }

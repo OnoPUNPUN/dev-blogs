@@ -1,7 +1,7 @@
 import 'package:clean_architecture_project/core/helpers/exceptions.dart';
 import 'package:clean_architecture_project/core/helpers/failures.dart';
 import 'package:clean_architecture_project/features/auth/data/datasources/auth_remote_data_source.dart';
-import 'package:clean_architecture_project/features/auth/domain/entities/user.dart';
+import 'package:clean_architecture_project/core/common/entities/user.dart';
 import 'package:clean_architecture_project/features/auth/domain/repository/auth_repository.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as sb;
