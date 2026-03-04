@@ -11,7 +11,10 @@ class AppTheme {
     appBarTheme: const AppBarTheme(backgroundColor: AppPallete.backgroundColor),
     chipTheme: const ChipThemeData(
       color: WidgetStatePropertyAll(AppPallete.backgroundColor),
-      side: BorderSide.none,
+      side: BorderSide(color: AppPallete.borderColor),
+      shape: StadiumBorder(
+        side: BorderSide(color: AppPallete.borderColor),
+      ),
     ),
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: const EdgeInsets.all(27),
