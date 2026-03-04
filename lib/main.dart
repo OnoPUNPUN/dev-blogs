@@ -2,7 +2,6 @@ import 'package:clean_architecture_project/core/common/cubits/app_user/app_user_
 import 'package:clean_architecture_project/core/theme/theme.dart';
 import 'package:clean_architecture_project/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:clean_architecture_project/features/auth/presentation/pages/login_screen.dart';
-import 'package:clean_architecture_project/features/blog/presentation/pages/blog_page.dart';
 import 'package:clean_architecture_project/init_dependency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,7 +46,7 @@ class _MyAppState extends State<MyApp> {
         },
         builder: (context, isLoggedIn) {
           if (isLoggedIn) {
-            return const BlogPage();
+            return Scaffold(body: Center(child: Text('Logged IN')));
           }
           return const LoginScreen();
         },
