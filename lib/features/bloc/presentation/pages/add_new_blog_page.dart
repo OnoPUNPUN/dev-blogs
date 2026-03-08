@@ -1,6 +1,6 @@
-import 'package:clean_architecture_project/features/blog/presentation/widgets/blog_editor.dart';
-import 'package:clean_architecture_project/features/blog/presentation/widgets/blog_topic_filter.dart';
-import 'package:clean_architecture_project/features/blog/presentation/widgets/select_image_container.dart';
+import 'package:clean_architecture_project/features/bloc/presentation/widgets/blog_editor.dart';
+import 'package:clean_architecture_project/features/bloc/presentation/widgets/blog_topic_filter.dart';
+import 'package:clean_architecture_project/features/bloc/presentation/widgets/select_image_container.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
