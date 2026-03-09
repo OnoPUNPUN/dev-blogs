@@ -1,8 +1,9 @@
-import 'package:clean_architecture_project/features/bloc/presentation/pages/add_new_blog_page.dart';
+import 'package:clean_architecture_project/features/blog/presentation/pages/add_new_blog_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BlogPage extends StatelessWidget {
+  static route() => MaterialPageRoute(builder: (context) => const BlogPage());
   const BlogPage({super.key});
 
   @override
