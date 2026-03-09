@@ -11,15 +11,16 @@ enum BlogTopic {
   final String label;
 }
 
-class BlogTopicFilter extends StatefulWidget {
-  const BlogTopicFilter({super.key});
+class BlogTopicFilter extends StatelessWidget {
+  final List<String> selectedTopics;
+  final ValueChanged<List<String>> onChanged;
 
-  @override
-  State<BlogTopicFilter> createState() => _BlogTopicFilterState();
-}
+  const BlogTopicFilter({
+    super.key,
+    required this.selectedTopics,
+    required this.onChanged,
+  });
 
-class _BlogTopicFilterState extends State<BlogTopicFilter> {
-  List<String> selectedTopics = [];
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -31,12 +32,15 @@ class _BlogTopicFilterState extends State<BlogTopicFilter> {
                 padding: const EdgeInsets.all(5.0),
                 child: GestureDetector(
                   onTap: () {
-                    if (selectedTopics.contains(topic.label)) {
-                      selectedTopics.remove(topic.label);
+                    final updatedTopics = List<String>.from(selectedTopics);
+
+                    if (updatedTopics.contains(topic.label)) {
+                      updatedTopics.remove(topic.label);
                     } else {
-                      selectedTopics.add(topic.label);
+                      updatedTopics.add(topic.label);
                     }
-                    setState(() {});
+
+                    onChanged(updatedTopics);
                   },
                   child: Chip(
                     label: Text(topic.label),

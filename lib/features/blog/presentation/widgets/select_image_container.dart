@@ -6,27 +6,30 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class SelectImageContainer extends StatefulWidget {
-  const SelectImageContainer({super.key});
+  final File? selectedImage;
+  final ValueChanged<File> onImageSelected;
+
+  const SelectImageContainer({
+    super.key,
+    required this.selectedImage,
+    required this.onImageSelected,
+  });
 
   @override
   State<SelectImageContainer> createState() => _SelectImageContainerState();
 }
 
 class _SelectImageContainerState extends State<SelectImageContainer> {
-  File? image;
-
   void selectImage() async {
     final pickedImage = await pickImage();
     if (pickedImage != null) {
-      setState(() {
-        image = pickedImage;
-      });
+      widget.onImageSelected(pickedImage);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return image != null
+    return widget.selectedImage != null
         ? GestureDetector(
             onTap: () {
               selectImage();
@@ -36,7 +39,7 @@ class _SelectImageContainerState extends State<SelectImageContainer> {
               width: double.infinity,
               child: ClipRRect(
                 borderRadius: BorderRadiusGeometry.circular(10),
-                child: Image.file(image!, fit: BoxFit.cover),
+                child: Image.file(widget.selectedImage!, fit: BoxFit.cover),
               ),
             ),
           )

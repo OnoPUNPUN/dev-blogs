@@ -8,6 +8,12 @@ import 'package:clean_architecture_project/features/auth/domain/usecases/current
 import 'package:clean_architecture_project/features/auth/domain/usecases/user_log_in.dart';
 import 'package:clean_architecture_project/features/auth/domain/usecases/user_sign_up.dart';
 import 'package:clean_architecture_project/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:clean_architecture_project/features/blog/data/datasources/blog_remote_data_source.dart';
+import 'package:clean_architecture_project/features/blog/data/datasources/blog_remote_data_source_impl.dart';
+import 'package:clean_architecture_project/features/blog/data/repository/blog_repository_impl.dart';
+import 'package:clean_architecture_project/features/blog/domain/repository/blog_repository.dart';
+import 'package:clean_architecture_project/features/blog/domain/usecases/upload_blog.dart';
+import 'package:clean_architecture_project/features/blog/presentation/bloc/blog_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -15,6 +21,7 @@ final serviLocatore = GetIt.instance;
 
 Future<void> initDependency() async {
   _initAuth();
+  _initBlog();
   if (!serviLocatore.isRegistered<SupabaseClient>()) {
     final supbase = await Supabase.initialize(
       url: AppSecrets.subaseUrl,
@@ -54,4 +61,20 @@ void _initAuth() {
       ),
     );
   }
+}
+
+void _initBlog() {
+  // Datasrouce
+  serviLocatore
+    ..registerFactory<BlogRemoteDataSource>(
+      () => BlogRemoteDataSourceImpl(supabaseClient: serviLocatore()),
+    )
+    // Repository
+    ..registerFactory<BlogRepository>(
+      () => BlogRepositoryImpl(blogRemoteDataSource: serviLocatore()),
+    )
+    // UseCase
+    ..registerFactory(() => UploadBlog(blogRepository: serviLocatore()))
+    // BlogBLoc
+    ..registerLazySingleton(() => BlogBloc(serviLocatore()));
 }
