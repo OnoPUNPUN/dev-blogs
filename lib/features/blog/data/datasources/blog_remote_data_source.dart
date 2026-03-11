@@ -9,4 +9,6 @@ abstract interface class BlogRemoteDataSource {
     required File image,
     required BlogModel blog,
   });
+
+  Future<List<BlogModel>> getAllBlogs();
 }

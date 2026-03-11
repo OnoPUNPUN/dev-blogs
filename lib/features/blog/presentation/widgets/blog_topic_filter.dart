@@ -13,43 +13,57 @@ enum BlogTopic {
 
 class BlogTopicFilter extends StatelessWidget {
   final List<String> selectedTopics;
-  final ValueChanged<List<String>> onChanged;
+  final ValueChanged<List<String>>? onChanged;
+  final bool isReadOnly;
 
   const BlogTopicFilter({
     super.key,
     required this.selectedTopics,
-    required this.onChanged,
+    this.onChanged,
+    this.isReadOnly = false,
   });
 
   @override
   Widget build(BuildContext context) {
+    final topicsToShow = isReadOnly
+        ? selectedTopics
+        : BlogTopic.values.map((topic) => topic.label).toList();
+
+    if (topicsToShow.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        children: BlogTopic.values
+        children: topicsToShow
             .map(
-              (topic) => Padding(
+              (topicLabel) => Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: GestureDetector(
-                  onTap: () {
-                    final updatedTopics = List<String>.from(selectedTopics);
+                  onTap: isReadOnly || onChanged == null
+                      ? null
+                      : () {
+                          final updatedTopics = List<String>.from(
+                            selectedTopics,
+                          );
 
-                    if (updatedTopics.contains(topic.label)) {
-                      updatedTopics.remove(topic.label);
-                    } else {
-                      updatedTopics.add(topic.label);
-                    }
+                          if (updatedTopics.contains(topicLabel)) {
+                            updatedTopics.remove(topicLabel);
+                          } else {
+                            updatedTopics.add(topicLabel);
+                          }
 
-                    onChanged(updatedTopics);
-                  },
+                          onChanged!(updatedTopics);
+                        },
                   child: Chip(
-                    label: Text(topic.label),
+                    label: Text(topicLabel),
                     color: WidgetStateProperty.all(
-                      selectedTopics.contains(topic.label)
-                          ? AppPallete.gradient1
+                      selectedTopics.contains(topicLabel)
+                          ? AppPallete.backgroundColor
                           : null,
                     ),
-                    side: selectedTopics.contains(topic.label)
+                    side: selectedTopics.contains(topicLabel)
                         ? null
                         : BorderSide(color: AppPallete.borderColor),
                   ),

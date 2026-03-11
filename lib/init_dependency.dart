@@ -12,6 +12,7 @@ import 'package:clean_architecture_project/features/blog/data/datasources/blog_r
 import 'package:clean_architecture_project/features/blog/data/datasources/blog_remote_data_source_impl.dart';
 import 'package:clean_architecture_project/features/blog/data/repository/blog_repository_impl.dart';
 import 'package:clean_architecture_project/features/blog/domain/repository/blog_repository.dart';
+import 'package:clean_architecture_project/features/blog/domain/usecases/get_all_blogs.dart';
 import 'package:clean_architecture_project/features/blog/domain/usecases/upload_blog.dart';
 import 'package:clean_architecture_project/features/blog/presentation/bloc/blog_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -75,6 +76,9 @@ void _initBlog() {
     )
     // UseCase
     ..registerFactory(() => UploadBlog(blogRepository: serviLocatore()))
+    ..registerFactory(() => GetAllBlogs(serviLocatore()))
     // BlogBLoc
-    ..registerLazySingleton(() => BlogBloc(serviLocatore()));
+    ..registerLazySingleton(
+      () => BlogBloc(uploadBlog: serviLocatore(), getAllBlogs: serviLocatore()),
+    );
 }
