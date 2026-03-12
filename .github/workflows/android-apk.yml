@@ -36,22 +36,28 @@ jobs:
           java-version: "17"
           cache: gradle
 
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: "3.41.0"
-          cache: true
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@v1
+
+      - name: Install FVM
+        run: dart pub global activate fvm
+
+      - name: Add FVM to PATH
+        run: echo "$HOME/.pub-cache/bin" >> "$GITHUB_PATH"
+
+      - name: Install Flutter with FVM
+        run: fvm install
 
       - name: Install dependencies
-        run: flutter pub get
+        run: fvm flutter pub get
 
       - name: Verify Flutter environment
-        run: flutter doctor -v
+        run: fvm flutter doctor -v
 
       # This repository's current widget test is still the default Flutter
       # counter test scaffold and does not match the app implementation.
       - name: Build release APK
-        run: flutter build apk --release
+        run: fvm flutter build apk --release
 
       - name: Upload release APK
         uses: actions/upload-artifact@v4
