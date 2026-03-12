@@ -39,7 +39,7 @@ class BlogTopicFilter extends StatelessWidget {
         children: topicsToShow
             .map(
               (topicLabel) => Padding(
-                padding: const EdgeInsets.all(5.0),
+                padding: const EdgeInsets.only(right: 8),
                 child: GestureDetector(
                   onTap: isReadOnly || onChanged == null
                       ? null
@@ -56,16 +56,29 @@ class BlogTopicFilter extends StatelessWidget {
 
                           onChanged!(updatedTopics);
                         },
-                  child: Chip(
-                    label: Text(topicLabel),
-                    color: WidgetStateProperty.all(
-                      selectedTopics.contains(topicLabel)
-                          ? AppPallete.backgroundColor
-                          : null,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 8,
                     ),
-                    side: selectedTopics.contains(topicLabel)
-                        ? null
-                        : BorderSide(color: AppPallete.borderColor),
+                    decoration: BoxDecoration(
+                      color: isReadOnly
+                          ? AppPallete.backgroundColor
+                          : selectedTopics.contains(topicLabel)
+                          ? AppPallete.gradient1
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.circular(8),
+                      border: selectedTopics.contains(topicLabel)
+                          ? null
+                          : Border.all(color: AppPallete.borderColor),
+                    ),
+                    child: Text(
+                      topicLabel,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ),
                 ),
               ),
