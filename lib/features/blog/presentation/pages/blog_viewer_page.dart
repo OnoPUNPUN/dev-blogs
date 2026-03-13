@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class BlogViewerPage extends StatelessWidget {
-  static route(Blog blog) =>
+  static MaterialPageRoute<void> route(Blog blog) =>
       MaterialPageRoute(builder: (context) => BlogViewerPage(blog: blog));
   final Blog blog;
   const BlogViewerPage({super.key, required this.blog});
@@ -43,8 +43,29 @@ class BlogViewerPage extends StatelessWidget {
 
                 Gap(20),
                 ClipRRect(
-                  borderRadius: BorderRadiusGeometry.circular(16),
-                  child: Image.network(blog.imageUrl),
+                  borderRadius: BorderRadius.circular(16),
+                  child: Image.network(
+                    blog.imageUrl,
+                    height: 220,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        height: 220,
+                        width: double.infinity,
+                        color: AppPallete.borderColor,
+                        alignment: Alignment.center,
+                        child: const Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.image_not_supported_outlined, size: 40),
+                            Gap(8),
+                            Text('Image unavailable offline'),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ),
                 Gap(20),
                 Text(blog.content, style: TextStyle(fontSize: 14, height: 2)),
