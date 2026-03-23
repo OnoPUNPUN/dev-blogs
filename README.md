@@ -170,15 +170,14 @@ Expected Supabase CRUD flow:
 
 > All local screenshots are in `screenshots/`.
 
-### Preview (Markdown image links)
+### Preview (smaller image size)
 
-![Blog List](screenshots/s1.png)
-
-![Create/Edit Blog](screenshots/s2.png)
-
-![Blog Detail](screenshots/s3.png)
-
-![Sign-in / Auth](screenshots/s4.png)
+<p float="left">
+  <img src="screenshots/s1.png" width="240" />
+  <img src="screenshots/s2.png" width="240" />
+  <img src="screenshots/s3.png" width="240" />
+  <img src="screenshots/s4.png" width="240" />
+</p>
 
 ### File reference
 
