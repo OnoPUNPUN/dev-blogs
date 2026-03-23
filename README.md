@@ -21,31 +21,58 @@ DevBlogs is a Flutter application built as a personal project to demonstrate a f
 
 ### 🗺️ Project Structure Diagram
 
+> GitHub may not support every Mermaid diagram type in preview; the following is a friendly fallback.
+
+```
+lib/
+  main.dart
+  core/
+    common/
+    helpers/
+    network/
+    secrets/
+    theme/
+    usecase/
+    utils/
+  features/
+    auth/
+      data/
+      domain/
+      presentation/
+    blog/
+      data/
+      domain/
+      presentation/
+android/
+ios/
+test/
+  widget_test.dart
+```
+
 ```mermaid
-tree
-  lib
-    main.dart
-    core
-      common
-      helpers
-      network
-      secrets
-      theme
-      usecase
-      utils
-    features
-      auth
-        data
-        domain
-        presentation
-      blog
-        data
-        domain
-        presentation
-  android
-  ios
-  test
-    widget_test.dart
+graph TD
+  A[lib] --> B[core]
+  A --> C[features]
+  A --> D[main.dart]
+  B --> B1[common]
+  B --> B2[helpers]
+  B --> B3[network]
+  B --> B4[secrets]
+  B --> B5[theme]
+  B --> B6[usecase]
+  B --> B7[utils]
+  C --> C1[auth]
+  C --> C2[blog]
+  C1 --> C1a[data]
+  C1 --> C1b[domain]
+  C1 --> C1c[presentation]
+  C2 --> C2a[data]
+  C2 --> C2b[domain]
+  C2 --> C2c[presentation]
+  A --> E[android]
+  A --> F[ios]
+  A --> G[test]
+  G --> G1[widget_test.dart]
 ```
 
 ## 🚀 How to Run
@@ -143,11 +170,24 @@ Expected Supabase CRUD flow:
 
 > All local screenshots are in `screenshots/`.
 
-1. `screenshots/screenshot_1.png` - blog list with category tags
-2. `screenshots/screenshot_2.png` - create/edit blog screen
-3. `screenshots/screenshot_3.png` - blog detail screen
+### Preview (Markdown image links)
 
-> If your CLI or repo uses different screenshot file names, update those entries.
+![Blog List](screenshots/s1.png)
+
+![Create/Edit Blog](screenshots/s2.png)
+
+![Blog Detail](screenshots/s3.png)
+
+![Sign-in / Auth](screenshots/s4.png)
+
+### File reference
+
+1. `screenshots/s1.png` - blog list with category tags
+2. `screenshots/s2.png` - create/edit blog screen
+3. `screenshots/s3.png` - blog detail screen
+4. `screenshots/s4.png` - auth screen
+
+> If your project uses different screenshot file names, update these links.
 
 ## 🧪 Tests
 
