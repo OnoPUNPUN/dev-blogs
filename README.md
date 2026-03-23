@@ -166,19 +166,6 @@ Expected Supabase CRUD flow:
 - Create/update blog screen with title, body, image and categories
 - Local caching and remote sync logic (if configured)
 
-## 🖼️ Screenshots
-
-> All local screenshots are in `screenshots/`.
-
-### Preview (smaller image size)
-
-<p float="left">
-  <img src="screenshots/s1.png" width="240" />
-  <img src="screenshots/s2.png" width="240" />
-  <img src="screenshots/s3.png" width="240" />
-  <img src="screenshots/s4.png" width="240" />
-</p>
-
 ### File reference
 
 1. `screenshots/s1.png` - blog list with category tags
