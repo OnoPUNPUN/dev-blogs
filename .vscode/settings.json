@@ -3,5 +3,5 @@
   "flutterTools.displayMobxContextMenu": false,
   "flutterTools.displayRiverpodContextMenu": false,
   "flutterTools.displayModularContextMenu": false,
-  "dart.flutterSdkPath": ".fvm/versions/3.41.0"
+  "dart.flutterSdkPath": ".fvm/versions/3.41.5"
 }
